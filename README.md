@@ -6,66 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ujian IPA: Sistem Endokrin dan Hormon</title>
     <style>
-        /* TEMA WARNA PASTEL */
         :root {
-            --primary: #b4a7d6; /* Ungu Pastel */
-            --success: #b6d7a8; /* Hijau Pastel */
-            --danger: #ea9999;  /* Merah Muda / Merah Pastel */
-            --warning: #f9cb9c; /* Oranye Pastel */
-            --light: #fdfbf7;   /* Krem sangat terang */
-            --dark: #5b5b5b;    /* Abu-abu gelap untuk teks agar mudah dibaca */
-            --body-bg: #fcf4f4; /* Latar belakang body pink super pucat */
+            --primary: #0275d8;
+            --success: #5cb85c;
+            --danger: #d9534f;
+            --light: #f4f7f6;
+            --dark: #333;
         }
-        
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--body-bg); margin: 0; padding: 0; color: var(--dark); }
-        .container { max-width: 900px; margin: 20px auto; background: white; padding: 20px 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.05); }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #e9ecef; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 20px auto; background: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .hidden { display: none !important; }
         
         /* Header & Info */
-        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #eadddd; padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        .timer { font-size: 1.5em; font-weight: bold; color: var(--danger); background: #fce8e8; padding: 5px 15px; border-radius: 8px; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .timer { font-size: 1.5em; font-weight: bold; color: var(--danger); }
         
         /* Layout Ujian (Responsive) */
         .exam-layout { display: flex; gap: 20px; }
         .main-content { flex: 3; }
-        .sidebar { flex: 1; background: var(--light); padding: 15px; border-radius: 12px; max-height: 500px; overflow-y: auto; border: 1px solid #f0ecec; }
+        .sidebar { flex: 1; background: var(--light); padding: 15px; border-radius: 8px; max-height: 500px; overflow-y: auto; }
         
         /* Panel Nomor */
         .panel-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 15px; }
-        .btn-nav { padding: 10px 0; text-align: center; border-radius: 8px; cursor: pointer; border: 1px solid #dcdcdc; font-weight: bold; background: white; color: var(--dark); transition: 0.3s; }
+        .btn-nav { padding: 10px 0; text-align: center; border-radius: 5px; cursor: pointer; border: 1px solid #ccc; font-weight: bold; background: white; transition: 0.2s; }
         .btn-nav.answered { background: var(--success); color: white; border-color: var(--success); }
-        .btn-nav.current { border: 3px solid var(--primary); transform: scale(1.1); box-shadow: 0 3px 6px rgba(180, 167, 214, 0.4); }
+        .btn-nav.current { border: 3px solid var(--primary); transform: scale(1.1); }
         
         /* Soal & Opsi */
-        .question-text { font-size: 1.2em; margin-bottom: 15px; line-height: 1.6; color: var(--dark); }
-        .badge-diff { display: inline-block; padding: 5px 10px; font-size: 0.85em; border-radius: 6px; color: white; margin-bottom: 15px; font-weight: bold; letter-spacing: 0.5px; }
-        .badge-lots { background: #9fc5e8; /* Biru Pastel */ }
-        .badge-mots { background: var(--warning); }
+        .question-text { font-size: 1.2em; margin-bottom: 10px; line-height: 1.5; color: var(--dark); }
+        .badge-diff { display: inline-block; padding: 4px 8px; font-size: 0.8em; border-radius: 4px; color: white; margin-bottom: 15px; }
+        .badge-lots { background: #17a2b8; }
+        .badge-mots { background: #f0ad4e; }
         
-        .option-label { display: block; background: var(--light); padding: 12px 15px; margin-bottom: 10px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
-        .option-label:hover { background: #f3f0f7; }
-        .option-label input { margin-right: 12px; transform: scale(1.2); accent-color: var(--primary); }
-        .option-label.selected { background: #ede8f5; border-color: var(--primary); color: #4a3c6b; font-weight: 500; }
+        .option-label { display: block; background: var(--light); padding: 12px; margin-bottom: 10px; border-radius: 5px; cursor: pointer; border: 1px solid #ddd; transition: 0.2s; }
+        .option-label:hover { background: #e2e6ea; }
+        .option-label input { margin-right: 10px; }
+        .option-label.selected { background: #d0e8fc; border-color: var(--primary); }
 
         /* Tombol Aksi */
-        .action-buttons { display: flex; justify-content: space-between; margin-top: 25px; gap: 10px; flex-wrap: wrap; }
-        button { padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: bold; transition: 0.3s; flex: 1; letter-spacing: 0.5px; }
-        button:hover { filter: brightness(0.95); transform: translateY(-2px); }
+        .action-buttons { display: flex; justify-content: space-between; margin-top: 20px; gap: 10px; flex-wrap: wrap; }
+        button { padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; font-weight: bold; transition: 0.2s; flex: 1; }
         .btn-primary { background: var(--primary); color: white; }
-        .btn-warning { background: var(--warning); color: white; }
+        .btn-warning { background: #f0ad4e; color: white; }
         .btn-danger { background: var(--danger); color: white; width: 100%; margin-top: 20px;}
         
         /* Pembahasan */
-        .result-item { border: 1px solid #eee; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .correct-ans { background: #f0f7ed; border-color: var(--success); }
-        .wrong-ans { background: #fcf0f0; border-color: var(--danger); }
-        .discussion { margin-top: 10px; font-size: 0.95em; background: #fffaf0; padding: 12px; border-radius: 6px; border-left: 5px solid var(--warning); }
+        .result-item { border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+        .correct-ans { background: #d4edda; border-color: #c3e6cb; }
+        .wrong-ans { background: #f8d7da; border-color: #f5c6cb; }
+        .discussion { margin-top: 10px; font-size: 0.95em; background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; }
         
-        input[type="text"], input[type="email"] { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; background: var(--light); transition: 0.3s; }
-        input[type="text"]:focus, input[type="email"]:focus { outline: none; border-color: var(--primary); background: white; }
-
-        /* Pesan Perhatian */
-        .alert-box { background: #fff5e6; padding: 15px; border-radius: 8px; border-left: 5px solid var(--warning); margin-bottom: 20px; font-size: 0.9em; line-height: 1.5; }
+        input[type="text"], input[type="email"] { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;}
 
         /* MEDIA QUERY UNTUK HP (PHONE MODE) */
         @media (max-width: 768px) {
@@ -83,15 +74,15 @@
 
     <!-- HALAMAN LOGIN -->
     <div id="loginPage" class="container">
-        <h2 style="text-align: center; color: var(--primary); margin-bottom: 5px;">Ujian Akhir: Sistem Endokrin dan Hormon</h2>
-        <p style="text-align: center; color: #888;">Mata Pelajaran: IPA Kelas 9 | Durasi: 45 Menit</p>
-        <hr style="border: none; border-top: 2px dashed #eee; margin: 20px 0;">
+        <h2 style="text-align: center; color: var(--primary);">Ujian Akhir: Sistem Endokrin dan Hormon</h2>
+        <p style="text-align: center;">Mata Pelajaran: IPA Kelas 9 | Durasi: 45 Menit</p>
+        <hr>
         <label>Nama Lengkap (Sesuai Absen):</label>
         <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
         <label>Email Siswa:</label>
         <input type="email" id="email" placeholder="Masukkan alamat email" required>
         
-        <div class="alert-box">
+        <div style="background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin-bottom: 20px; font-size: 0.9em;">
             <strong>⚠️ PERHATIAN PENTING:</strong><br>
             1. <b>Soal & Opsi Jawaban diacak</b> untuk setiap siswa.<br>
             2. Layar akan masuk mode penuh (Fullscreen).<br>
@@ -106,8 +97,8 @@
     <div id="examPage" class="container hidden">
         <div class="header">
             <div>
-                <h3 style="margin:0; color: var(--primary);">IPA: Sistem Endokrin</h3>
-                <small id="identitasSiswa" style="color: #777;"></small>
+                <h3 style="margin:0;">IPA: Sistem Endokrin</h3>
+                <small id="identitasSiswa"></small>
             </div>
             <div class="timer" id="timerDisplay">45:00</div>
         </div>
@@ -126,22 +117,22 @@
             </div>
             
             <div class="sidebar">
-                <h4 style="margin-top:0; text-align: center; color: var(--primary);">Navigasi Soal</h4>
+                <h4 style="margin-top:0; text-align: center;">Navigasi Soal</h4>
                 <div class="panel-grid" id="panelGrid"></div>
-                <button class="btn-danger" style="padding: 15px; font-size: 1.1em; margin-top: 25px;" onclick="konfirmasiSelesai()">SELESAI & KUMPULKAN</button>
+                <button class="btn-danger" style="padding: 15px; font-size: 1.1em;" onclick="konfirmasiSelesai()">SELESAI & KUMPULKAN</button>
             </div>
         </div>
     </div>
 
     <!-- HALAMAN HASIL & PEMBAHASAN -->
     <div id="resultPage" class="container hidden">
-        <h2 style="text-align: center; color: var(--primary);">Hasil Ujian</h2>
-        <div style="text-align: center; font-size: 1.2em; margin-bottom: 20px; background: var(--light); padding: 20px; border-radius: 10px;">
-            Nama: <span id="resNama" style="font-weight: bold;"></span><br>
-            Nilai Akhir: <strong id="resSkor" style="font-size: 2.5em; color: var(--success); display: block; margin-top: 10px;"></strong>
+        <h2 style="text-align: center;">Hasil Ujian</h2>
+        <div style="text-align: center; font-size: 1.2em; margin-bottom: 20px;">
+            Nama: <span id="resNama"></span><br>
+            Nilai Akhir: <strong id="resSkor" style="font-size: 2em; color: var(--primary);"></strong>
         </div>
-        <hr style="border: none; border-top: 2px dashed #eee; margin: 20px 0;">
-        <h3 style="color: var(--primary);">Pembahasan:</h3>
+        <hr>
+        <h3>Pembahasan:</h3>
         <div id="discussionContainer"></div>
     </div>
 
@@ -201,8 +192,8 @@
         function acakSoalDanOpsi() {
             shuffleArray(bankSoal);
             bankSoal.forEach(q => {
-                let correctAnswerText = q.opt[q.ans]; 
-                shuffleArray(q.opt); 
+                let correctAnswerText = q.opt[q.ans];
+                shuffleArray(q.opt);
                 q.ans = q.opt.indexOf(correctAnswerText); 
             });
         }
@@ -278,7 +269,7 @@
                 inp.onchange = () => pilihJawaban(index, i, lbl);
                 
                 let teksBersih = opsi.replace(/^[A-D]\.\s*/, "");
-                let abjadBaru = String.fromCharCode(65 + i); 
+                let abjadBaru = String.fromCharCode(65 + i);
                 
                 lbl.appendChild(inp);
                 lbl.appendChild(document.createTextNode(abjadBaru + ". " + teksBersih));
@@ -357,48 +348,40 @@
             kalkulasiDanKirim("Selesai Normal");
         }
 
+        // --- MODIFIKASI: KALKULASI & KIRIM VIA WHATSAPP ---
         function kalkulasiDanKirim(statusUjian) {
             isExamActive = false;
             clearInterval(timerInterval);
             
             let benar = 0;
             
-            let stringJawabanSiswa = answers.map((ans, idx) => {
+            answers.forEach((ans, idx) => {
                 let qData = bankSoal[idx];
                 let isBenar = (ans === qData.ans);
                 if (isBenar) benar++;
-                
-                let statusJwb = isBenar ? "Benar" : "Salah";
-                let teksPilihan = ans !== null ? qData.opt[ans].replace(/^[A-D]\.\s*/, "") : "Kosong";
-                
-                return `ID${qData.id}:${teksPilihan}(${statusJwb})`;
-            }).join(" | ");
-            
-            let nilai = Math.round((benar / bankSoal.length) * 100);
-
-            let payload = {
-                nama: namaSiswa,
-                email: emailSiswa,
-                skor: statusUjian === "Diskualifikasi" ? 0 : nilai,
-                status: statusUjian,
-                detailJawaban: stringJawabanSiswa
-            };
-
-            let gasURL = "URL_GOOGLE_APPS_SCRIPT_ANDA_DISINI"; 
-
-            document.body.style.cursor = 'wait';
-            tampilkanHasilDanPembahasan(nilai);
-
-            fetch(gasURL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                document.body.style.cursor = 'default';
-            }).catch(e => {
-                document.body.style.cursor = 'default';
             });
+            
+            let nilaiAkhir = Math.round((benar / bankSoal.length) * 100);
+            if (statusUjian === "Diskualifikasi") nilaiAkhir = 0;
+
+            // Tampilkan hasil di halaman (juga menutup fullscreen secara otomatis)
+            tampilkanHasilDanPembahasan(nilaiAkhir);
+
+            // Format Pesan WhatsApp
+            let nomorTujuan = "6281226260404";
+            let teksPesan = `*Laporan Hasil Ujian IPA*\n\n` +
+                            `Nama: ${namaSiswa}\n` +
+                            `Email: ${emailSiswa}\n` +
+                            `Status Ujian: ${statusUjian}\n` +
+                            `*Nilai/Skor: ${nilaiAkhir}*`;
+            
+            // Encode teks menjadi URL format
+            let linkWA = `https://api.whatsapp.com/send?phone=${nomorTujuan}&text=${encodeURIComponent(teksPesan)}`;
+            
+            // Buka tab baru yang mengarah langsung ke WhatsApp
+            setTimeout(() => {
+                window.open(linkWA, '_blank');
+            }, 1000); // Beri jeda 1 detik agar layar exit fullscreen terlebih dahulu
         }
 
         function tampilkanHasilDanPembahasan(skorAkhir) {
@@ -425,8 +408,8 @@
                 item.className = `result-item ${isBenar ? 'correct-ans' : 'wrong-ans'}`;
                 
                 item.innerHTML = `
-                    <b>Soal No ${i + 1} (${q.type}) - <small style="color:#888;">ID Soal Asli: ${q.id}</small></b>
-                    <p style="color: var(--dark);">${q.q}</p>
+                    <b>Soal No ${i + 1} (${q.type}) - <small style="color:#666;">ID Soal Asli: ${q.id}</small></b>
+                    <p>${q.q}</p>
                     <p>Jawaban Anda: <b>${jwbTeks}</b> ${isBenar ? '✅' : '❌'}</p>
                     <p>Kunci Jawaban: <b>${kunciTeks}</b></p>
                     <div class="discussion"><b>Pembahasan:</b> ${q.bahas}</div>
